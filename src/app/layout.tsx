@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
+import FitProvider from "@/context/FitContext";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -18,8 +19,11 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html lang="en" className={`${inter.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col">
 
-        <Navbar />
-        <main>{children}</main>
+        <FitProvider>
+          <Navbar />
+          <main>{children}</main>
+        </FitProvider>
+
       </body>
     </html>
   );

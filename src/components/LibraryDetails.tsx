@@ -1,5 +1,7 @@
 import { WorkoutType } from "@/type"
 import Image from "next/image";
+import { FiBookmark } from "react-icons/fi";
+import MyPlanButton from "./LibraryDetails/myPlanButton";
 
 export interface LibraryDetailsProps {
     singleData: WorkoutType;
@@ -62,6 +64,12 @@ export default function LibraryDetails({ singleData }: LibraryDetailsProps) {
                                 singleData.instructions.map((ins, index) => <li key={index}>{ins}</li>)
                             }
                         </ol>
+                    </div>
+                    <div className="flex items-center gap-4">
+                        <MyPlanButton singleData={singleData} />
+                        <button className="flex items-center gap-2 mt-7 rounded-lg bg-primary px-6 py-3 font-semibold text-black transition-all duration-300 hover:scale-105 hover:shadow-lg">
+                            <FiBookmark />Save for later
+                        </button>
                     </div>
                 </div>
             </div>

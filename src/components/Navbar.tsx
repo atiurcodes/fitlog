@@ -1,11 +1,17 @@
 "use client";
 
 import logo from "@/assets/logo.png";
+import { FitContext } from "@/context/FitContext";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { use, useState } from "react";
 
 const Navbar = () => {
+    const fitContext = use(FitContext);
+    if (!fitContext) {
+        throw new Error("ReadButton must be used inside BooksProvider");
+    }
+    const { plan } = fitContext;
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     const links = (
