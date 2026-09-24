@@ -15,13 +15,14 @@ const Navbar = () => {
             </li>
 
             <li>
-                <Link href="/workouts">My Plan</Link>
+                <Link href="/my-plan">My Plan</Link>
             </li>
         </>
     );
 
     return (
-        <section className="relative z-50 border-b border-[#9CA3AF]">
+        <section className="relative z-50 border-b-2 border-[#24262B]">
+
             <div className="container mx-auto px-4 py-4">
 
                 {/* Main Navbar */}
