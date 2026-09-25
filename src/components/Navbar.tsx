@@ -1,34 +1,52 @@
+
 "use client";
 
 import logo from "@/assets/logo.png";
-import { FitContext } from "@/context/FitContext";
 import Image from "next/image";
 import Link from "next/link";
-import { use, useState } from "react";
+import { usePathname } from "next/navigation";
+import { useState } from "react";
 
 const Navbar = () => {
-    const fitContext = use(FitContext);
-    if (!fitContext) {
-        throw new Error("ReadButton must be used inside BooksProvider");
-    }
-    const { plan } = fitContext;
+    const pathname = usePathname();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+    const isWorkoutsActive =
+        pathname === "/" || pathname.startsWith("/workouts");
+
+    const isMyPlanActive =
+        pathname.startsWith("/my-plan");
 
     const links = (
         <>
             <li>
-                <Link href="/workouts">Workouts</Link>
+                <Link
+                    href="/"
+                    className={`transition-colors duration-200 ${isWorkoutsActive
+                        ? "text-brand"
+                        : "text-white hover:text-brand"
+                        }`}
+                >
+                    Workouts
+                </Link>
             </li>
 
             <li>
-                <Link href="/my-plan">My Plan</Link>
+                <Link
+                    href="/my-plan"
+                    className={`transition-colors duration-200 ${isMyPlanActive
+                        ? "text-brand"
+                        : "text-white hover:text-brand"
+                        }`}
+                >
+                    My Plan
+                </Link>
             </li>
         </>
     );
 
     return (
         <section className="relative z-50 border-b-2 border-[#24262B]">
-
             <div className="container mx-auto px-4 py-4">
 
                 {/* Main Navbar */}
@@ -36,9 +54,17 @@ const Navbar = () => {
 
                     {/* Logo */}
                     <Link href="/" className="flex items-center gap-2">
-                        <Image src={logo} alt="Fitlog" width={40} height={40} />
-                        <p className="text-white font-bold text-xl">FITLOG</p>
+                        <Image
+                            src={logo}
+                            alt="Fitlog"
+                            width={40}
+                            height={40}
+                        />
+                        <p className="text-xl font-bold text-white">
+                            FITLOG
+                        </p>
                     </Link>
+
                     {/* Desktop Links */}
                     <div className="hidden md:block">
                         <ul className="flex items-center gap-6">
@@ -47,7 +73,7 @@ const Navbar = () => {
                     </div>
 
                     {/* Desktop Buttons */}
-                    <div className="hidden md:flex items-center gap-5">
+                    <div className="hidden items-center gap-5 md:flex">
                         <button>Plan</button>
                         <button>Saved</button>
                     </div>
@@ -55,7 +81,7 @@ const Navbar = () => {
                     {/* Mobile Menu Button */}
                     <button
                         onClick={() => setIsMenuOpen(!isMenuOpen)}
-                        className="md:hidden text-white text-2xl"
+                        className="text-2xl text-white md:hidden"
                         aria-label="Toggle menu"
                     >
                         <span
@@ -79,39 +105,49 @@ const Navbar = () => {
                     <div className="container mx-auto px-4 py-6">
                         <ul className="flex flex-col gap-1">
 
+                            {/* Workouts */}
                             <li>
                                 <Link
-                                    href="/workouts"
+                                    href="/"
                                     onClick={() => setIsMenuOpen(false)}
-                                    className="block rounded-lg px-3 py-3 text-white transition-all duration-200 hover:bg-white/10 hover:translate-x-1"
+                                    className={`block rounded-lg px-3 py-3 transition-all duration-200 hover:translate-x-1 hover:bg-white/10 ${isWorkoutsActive
+                                        ? "bg-white/10 text-brand"
+                                        : "text-white"
+                                        }`}
                                 >
                                     Workouts
                                 </Link>
                             </li>
 
+                            {/* My Plan */}
                             <li>
                                 <Link
-                                    href="/workouts"
+                                    href="/my-plan"
                                     onClick={() => setIsMenuOpen(false)}
-                                    className="block rounded-lg px-3 py-3 text-white transition-all duration-200 hover:bg-white/10 hover:translate-x-1"
+                                    className={`block rounded-lg px-3 py-3 transition-all duration-200 hover:translate-x-1 hover:bg-white/10 ${isMyPlanActive
+                                        ? "bg-white/10 text-brand"
+                                        : "text-white"
+                                        }`}
                                 >
                                     My Plan
                                 </Link>
                             </li>
 
+                            {/* Plan */}
                             <li>
                                 <button
                                     onClick={() => setIsMenuOpen(false)}
-                                    className="w-full rounded-lg px-3 py-3 text-left text-white transition-all duration-200 hover:bg-white/10 hover:translate-x-1"
+                                    className="w-full rounded-lg px-3 py-3 text-left text-white transition-all duration-200 hover:translate-x-1 hover:bg-white/10"
                                 >
                                     Plan
                                 </button>
                             </li>
 
+                            {/* Saved */}
                             <li>
                                 <button
                                     onClick={() => setIsMenuOpen(false)}
-                                    className="w-full rounded-lg px-3 py-3 text-left text-white transition-all duration-200 hover:bg-white/10 hover:translate-x-1"
+                                    className="w-full rounded-lg px-3 py-3 text-left text-white transition-all duration-200 hover:translate-x-1 hover:bg-white/10"
                                 >
                                     Saved
                                 </button>
@@ -120,7 +156,6 @@ const Navbar = () => {
                         </ul>
                     </div>
                 </div>
-
             </div>
         </section>
     );
