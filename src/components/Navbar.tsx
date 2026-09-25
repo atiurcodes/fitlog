@@ -2,13 +2,27 @@
 "use client";
 
 import logo from "@/assets/logo.png";
+import { FitContext } from "@/context/FitContext";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { use } from "react";
 import { useState } from "react";
 
 const Navbar = () => {
     const pathname = usePathname();
+
+    const fitContext = use(FitContext);
+
+    if (!fitContext) {
+        throw new Error("Navbar must be used inside FitProvider");
+    }
+
+    const {
+        activeTab,
+        setActiveTab,
+    } = fitContext;
+
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     const isWorkoutsActive =
@@ -17,13 +31,21 @@ const Navbar = () => {
     const isMyPlanActive =
         pathname.startsWith("/my-plan");
 
+    const handlePlanClick = () => {
+        setActiveTab("today");
+    };
+
+    const handleSavedClick = () => {
+        setActiveTab("saved");
+    };
+
     const links = (
         <>
             <li>
                 <Link
                     href="/"
                     className={`transition-colors duration-200 ${isWorkoutsActive
-                        ? "text-brand"
+                        ? "text-brand bg-brand/20 px-4 py-2 rounded-full"
                         : "text-white hover:text-brand"
                         }`}
                 >
@@ -35,7 +57,7 @@ const Navbar = () => {
                 <Link
                     href="/my-plan"
                     className={`transition-colors duration-200 ${isMyPlanActive
-                        ? "text-brand"
+                        ? "text-brand bg-brand/20 px-4 py-2 rounded-full"
                         : "text-white hover:text-brand"
                         }`}
                 >
@@ -60,6 +82,7 @@ const Navbar = () => {
                             width={40}
                             height={40}
                         />
+
                         <p className="text-xl font-bold text-white">
                             FITLOG
                         </p>
@@ -74,8 +97,33 @@ const Navbar = () => {
 
                     {/* Desktop Buttons */}
                     <div className="hidden items-center gap-5 md:flex">
-                        <button>Plan</button>
-                        <button>Saved</button>
+
+                        {/* Plan */}
+                        <Link
+                            href="/my-plan"
+                            onClick={handlePlanClick}
+                            className={`rounded-full px-4 py-2 transition-all duration-200 ${isMyPlanActive &&
+                                activeTab === "today"
+                                ? "bg-brand/20 text-brand"
+                                : "text-muted hover:text-brand"
+                                }`}
+                        >
+                            Plan
+                        </Link>
+
+                        {/* Saved */}
+                        <Link
+                            href="/my-plan"
+                            onClick={handleSavedClick}
+                            className={`rounded-full px-4 py-2 transition-all duration-200 ${isMyPlanActive &&
+                                activeTab === "saved"
+                                ? "bg-brand/20 text-brand"
+                                : "text-muted hover:text-brand"
+                                }`}
+                        >
+                            Saved
+                        </Link>
+
                     </div>
 
                     {/* Mobile Menu Button */}
@@ -135,22 +183,38 @@ const Navbar = () => {
 
                             {/* Plan */}
                             <li>
-                                <button
-                                    onClick={() => setIsMenuOpen(false)}
-                                    className="w-full rounded-lg px-3 py-3 text-left text-white transition-all duration-200 hover:translate-x-1 hover:bg-white/10"
+                                <Link
+                                    href="/my-plan"
+                                    onClick={() => {
+                                        handlePlanClick();
+                                        setIsMenuOpen(false);
+                                    }}
+                                    className={`block w-full rounded-lg px-3 py-3 text-left transition-all duration-200 hover:translate-x-1 hover:bg-white/10 ${isMyPlanActive &&
+                                        activeTab === "today"
+                                        ? "bg-brand/20 text-brand"
+                                        : "text-white"
+                                        }`}
                                 >
                                     Plan
-                                </button>
+                                </Link>
                             </li>
 
                             {/* Saved */}
                             <li>
-                                <button
-                                    onClick={() => setIsMenuOpen(false)}
-                                    className="w-full rounded-lg px-3 py-3 text-left text-white transition-all duration-200 hover:translate-x-1 hover:bg-white/10"
+                                <Link
+                                    href="/my-plan"
+                                    onClick={() => {
+                                        handleSavedClick();
+                                        setIsMenuOpen(false);
+                                    }}
+                                    className={`block w-full rounded-lg px-3 py-3 text-left transition-all duration-200 hover:translate-x-1 hover:bg-white/10 ${isMyPlanActive &&
+                                        activeTab === "saved"
+                                        ? "bg-brand/20 text-brand"
+                                        : "text-white"
+                                        }`}
                                 >
                                     Saved
-                                </button>
+                                </Link>
                             </li>
 
                         </ul>

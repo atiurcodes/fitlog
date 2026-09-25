@@ -1,10 +1,11 @@
+
 'use client'
 
 import MyPlanCard from "@/components/MyPlanCard";
 import NoData from "@/components/NoData";
 import { FitContext } from "@/context/FitContext";
 import { WorkoutType } from "@/type";
-import { use, useState } from "react";
+import { use } from "react";
 
 export default function Page() {
     const fitContext = use(FitContext);
@@ -13,9 +14,12 @@ export default function Page() {
         throw new Error("My Plan page must be used inside FitProvider");
     }
 
-    const { plans, saves } = fitContext;
-
-    const [activeTab, setActiveTab] = useState<'today' | 'saved'>('today');
+    const {
+        plans,
+        saves,
+        activeTab,
+        setActiveTab,
+    } = fitContext;
 
     // Active tab অনুযায়ী data select হবে
     const currentPlans = activeTab === 'today' ? plans : saves;
@@ -92,6 +96,7 @@ export default function Page() {
                     {/* Tabs */}
                     <div className="flex items-center gap-1 rounded-xl border border-gray-800 bg-[#15171D] p-1.5">
 
+                        {/* Today's Plan */}
                         <button
                             type="button"
                             onClick={() => setActiveTab('today')}
@@ -103,6 +108,7 @@ export default function Page() {
                             Today's plan
                         </button>
 
+                        {/* Saved */}
                         <button
                             type="button"
                             onClick={() => setActiveTab('saved')}
