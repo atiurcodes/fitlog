@@ -1,7 +1,11 @@
 
+'use client'
+
+import { FitContext } from "@/context/FitContext";
 import { WorkoutType } from "@/type";
 import Image from "next/image";
 import Link from "next/link";
+import { use } from "react";
 
 export interface MyPlanCardProps {
     plan: WorkoutType;
@@ -12,6 +16,37 @@ export default function MyPlanCard({
     plan,
     activeTab,
 }: MyPlanCardProps) {
+
+    const fitContext = use(FitContext);
+
+    if (!fitContext) {
+        throw new Error("MyPlanCard must be used inside FitProvider");
+    }
+
+    const {
+        plans,
+        saves,
+        setPlans,
+        setSaves,
+    } = fitContext;
+
+    const handleRemove = () => {
+
+        if (activeTab === 'today') {
+            const updatedPlans = plans.filter(
+                (item) => item.id !== plan.id
+            );
+
+            setPlans(updatedPlans);
+        } else {
+            const updatedSaves = saves.filter(
+                (item) => item.id !== plan.id
+            );
+
+            setSaves(updatedSaves);
+        }
+    };
+
     return (
         <section>
             <div className="flex items-center justify-between bg-[#111319] text-white p-3 rounded-2xl border border-gray-800/80 shadow-xl">
@@ -30,6 +65,7 @@ export default function MyPlanCard({
 
                     {/* Text Details */}
                     <div className="flex flex-col gap-1">
+
                         <h3 className="text-base font-black uppercase tracking-wider text-white">
                             {plan.name}
                         </h3>
@@ -48,7 +84,6 @@ export default function MyPlanCard({
                                     fill="none"
                                     stroke="currentColor"
                                     viewBox="0 0 24 24"
-                                    xmlns="http://www.w3.org/2000/svg"
                                 >
                                     <path
                                         strokeLinecap="round"
@@ -69,7 +104,6 @@ export default function MyPlanCard({
                                     className="w-3.5 h-3.5"
                                     fill="currentColor"
                                     viewBox="0 0 24 24"
-                                    xmlns="http://www.w3.org/2000/svg"
                                 >
                                     <path d="M12 2c0 0-5 4-5 8.5C7 13.5 9.2 16 12 16s5-2.5 5-5.5C17 6 12 2 12 2z" />
                                 </svg>
@@ -84,7 +118,6 @@ export default function MyPlanCard({
                                 <svg
                                     className="w-3.5 h-3.5 fill-current"
                                     viewBox="0 0 24 24"
-                                    xmlns="http://www.w3.org/2000/svg"
                                 >
                                     <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
                                 </svg>
@@ -98,7 +131,7 @@ export default function MyPlanCard({
                     </div>
                 </div>
 
-                {/* Right Side: Action Buttons */}
+                {/* Right Side */}
                 <div className="flex items-center gap-3">
 
                     {/* View Details */}
@@ -109,7 +142,7 @@ export default function MyPlanCard({
                         View Details
                     </Link>
 
-                    {/* Mark as Done - Only Today's Plan */}
+                    {/* Mark as Done */}
                     {activeTab === 'today' && (
                         <button
                             type="button"
@@ -132,9 +165,10 @@ export default function MyPlanCard({
                         </button>
                     )}
 
-                    {/* Close Icon */}
+                    {/* Remove */}
                     <button
                         type="button"
+                        onClick={handleRemove}
                         className="text-gray-500 hover:text-white transition-colors p-1 ml-1"
                     >
                         <svg
