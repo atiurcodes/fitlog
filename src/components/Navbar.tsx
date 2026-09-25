@@ -21,6 +21,9 @@ const Navbar = () => {
     const {
         activeTab,
         setActiveTab,
+        plans,
+        saves
+
     } = fitContext;
 
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -99,16 +102,14 @@ const Navbar = () => {
                     <div className="hidden items-center gap-5 md:flex">
 
                         {/* Plan */}
-                        <Link
-                            href="/my-plan"
-                            onClick={handlePlanClick}
+                        <Link href="/my-plan" onClick={handlePlanClick}
                             className={`rounded-full px-4 py-2 transition-all duration-200 ${isMyPlanActive &&
                                 activeTab === "today"
                                 ? "bg-brand/20 text-brand"
                                 : "text-muted hover:text-brand"
-                                }`}
-                        >
-                            Plan
+                                }`}>
+                            <span>Plan</span>
+                            <span className="ml-1 bg-brand px-2 text-black rounded-full">{plans.length}</span>
                         </Link>
 
                         {/* Saved */}
@@ -119,9 +120,11 @@ const Navbar = () => {
                                 activeTab === "saved"
                                 ? "bg-brand/20 text-brand"
                                 : "text-muted hover:text-brand"
-                                }`}
-                        >
-                            Saved
+                                }`}>
+                            <span>Saved</span>
+                            {saves.length > 0 && (
+                                <span className="ml-1 px-2 text-white rounded-full">{saves.length}</span>
+                            )}
                         </Link>
 
                     </div>

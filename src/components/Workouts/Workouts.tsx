@@ -30,7 +30,7 @@ export default async function Workouts() {
                     Twelve lifts covering every major muscle group.
                 </p>
 
-                <div className="grid grid-cols-3 items-center gap-5">
+                <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
                     {datas.map((data) => (
                         <LibraryCard
                             key={data.id}

@@ -49,10 +49,10 @@ export default function MyPlanCard({
 
     return (
         <section>
-            <div className="flex items-center justify-between bg-[#111319] text-white p-3 rounded-2xl border border-gray-800/80 shadow-xl">
+            <div className="flex flex-col gap-4 rounded-2xl border border-gray-800/80 bg-[#111319] p-3 text-white shadow-xl sm:flex-row sm:items-center sm:justify-between">
 
                 {/* Left Side: Thumbnail & Info */}
-                <div className="flex items-center gap-4">
+                <div className="flex min-w-0 items-center gap-3 sm:gap-4">
 
                     {/* Thumbnail Image */}
                     <Image
@@ -60,27 +60,27 @@ export default function MyPlanCard({
                         alt={plan.name}
                         width={100}
                         height={100}
-                        className="rounded-xl"
+                        className="h-20 w-20 shrink-0 rounded-xl sm:h-[100px] sm:w-[100px]"
                     />
 
                     {/* Text Details */}
-                    <div className="flex flex-col gap-1">
+                    <div className="flex min-w-0 flex-col gap-1">
 
-                        <h3 className="text-base font-black uppercase tracking-wider text-white">
+                        <h3 className="truncate text-sm font-black uppercase tracking-wider text-white sm:text-base">
                             {plan.name}
                         </h3>
 
-                        <p className="text-xs text-muted font-medium">
+                        <p className="text-xs font-medium text-muted">
                             {plan.category}
                         </p>
 
                         {/* Metrics */}
-                        <div className="flex items-center gap-3.5 text-xs text-gray-300 mt-1">
+                        <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5 text-xs text-gray-300 sm:mt-1 sm:gap-3.5">
 
                             {/* Duration */}
                             <span className="flex items-center gap-1.5 text-lime-400">
                                 <svg
-                                    className="w-3.5 h-3.5"
+                                    className="h-3.5 w-3.5 shrink-0"
                                     fill="none"
                                     stroke="currentColor"
                                     viewBox="0 0 24 24"
@@ -89,11 +89,11 @@ export default function MyPlanCard({
                                         strokeLinecap="round"
                                         strokeLinejoin="round"
                                         strokeWidth="2"
-                                        d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                                        d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 11-18 0 9 9 0 0118 0z"
                                     />
                                 </svg>
 
-                                <span className="text-gray-300 font-medium">
+                                <span className="font-medium text-gray-300">
                                     {plan.duration} min
                                 </span>
                             </span>
@@ -101,14 +101,14 @@ export default function MyPlanCard({
                             {/* Calories */}
                             <span className="flex items-center gap-1.5 text-lime-400">
                                 <svg
-                                    className="w-3.5 h-3.5"
+                                    className="h-3.5 w-3.5 shrink-0"
                                     fill="currentColor"
                                     viewBox="0 0 24 24"
                                 >
                                     <path d="M12 2c0 0-5 4-5 8.5C7 13.5 9.2 16 12 16s5-2.5 5-5.5C17 6 12 2 12 2z" />
                                 </svg>
 
-                                <span className="text-gray-300 font-medium">
+                                <span className="font-medium text-gray-300">
                                     {plan.caloriesBurned} kcal
                                 </span>
                             </span>
@@ -116,13 +116,13 @@ export default function MyPlanCard({
                             {/* Rating */}
                             <span className="flex items-center gap-1.5 text-lime-400">
                                 <svg
-                                    className="w-3.5 h-3.5 fill-current"
+                                    className="h-3.5 w-3.5 shrink-0 fill-current"
                                     viewBox="0 0 24 24"
                                 >
                                     <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
                                 </svg>
 
-                                <span className="text-gray-300 font-medium">
+                                <span className="font-medium text-gray-300">
                                     {plan.rating}
                                 </span>
                             </span>
@@ -131,13 +131,13 @@ export default function MyPlanCard({
                     </div>
                 </div>
 
-                {/* Right Side */}
-                <div className="flex items-center gap-3">
+                {/* Right Side / Mobile Bottom */}
+                <div className="flex flex-wrap items-center justify-start gap-2 sm:justify-end sm:gap-3">
 
                     {/* View Details */}
                     <Link
                         href={`/workouts/${plan.id}`}
-                        className="px-4 py-2 border border-gray-700 hover:border-gray-500 text-xs font-semibold text-gray-200 rounded-full transition-all duration-200"
+                        className="rounded-full border border-gray-700 px-3 py-2 text-xs font-semibold text-gray-200 transition-all duration-200 hover:border-gray-500 sm:px-4"
                     >
                         View Details
                     </Link>
@@ -146,10 +146,10 @@ export default function MyPlanCard({
                     {activeTab === 'today' && (
                         <button
                             type="button"
-                            className="flex items-center gap-1.5 px-4 py-2 bg-lime-400 hover:bg-lime-300 text-black font-bold text-xs rounded-full transition-all duration-200"
+                            className="flex items-center gap-1.5 rounded-full bg-lime-400 px-3 py-2 text-xs font-bold text-black transition-all duration-200 hover:bg-lime-300 sm:px-4"
                         >
                             <svg
-                                className="w-4 h-4 stroke-[3]"
+                                className="h-4 w-4 stroke-[3]"
                                 fill="none"
                                 stroke="currentColor"
                                 viewBox="0 0 24 24"
@@ -169,10 +169,10 @@ export default function MyPlanCard({
                     <button
                         type="button"
                         onClick={handleRemove}
-                        className="text-gray-500 hover:text-white transition-colors p-1 ml-1"
+                        className="rounded-full p-2 text-gray-500 transition-colors hover:bg-white/5 hover:text-white"
                     >
                         <svg
-                            className="w-4 h-4"
+                            className="h-4 w-4"
                             fill="none"
                             stroke="currentColor"
                             viewBox="0 0 24 24"

@@ -39,11 +39,11 @@ export default function Page() {
 
     return (
         <section className="container mx-auto px-4 text-white">
-            <div className="mx-auto max-w-5xl space-y-6 py-10">
+            <div className="mx-auto max-w-5xl space-y-6 py-8 sm:py-10">
 
                 {/* Heading */}
                 <div>
-                    <h2 className="text-2xl font-bold leading-tight uppercase lg:text-3xl">
+                    <h2 className="text-2xl font-bold leading-tight uppercase sm:text-3xl">
                         MY PLAN
                     </h2>
 
@@ -53,37 +53,37 @@ export default function Page() {
                 </div>
 
                 {/* Top Metrics Container */}
-                <div className="flex items-center gap-2 rounded-xl border border-gray-800 bg-[#15171D] p-6">
+                <div className="flex items-center gap-2 rounded-xl border border-gray-800 bg-[#15171D] p-4 sm:p-6">
 
                     {/* Exercises */}
-                    <div className="flex-1 border-r border-[#24262B]">
-                        <h2 className="text-sm font-semibold text-muted">
+                    <div className="flex-1 border-r border-[#24262B] pr-2 sm:pr-4">
+                        <h2 className="text-xs font-semibold text-muted sm:text-sm">
                             Exercises
                         </h2>
 
-                        <p className="mt-1 text-xl font-bold">
+                        <p className="mt-1 text-lg font-bold sm:text-xl">
                             {totalExercises}
                         </p>
                     </div>
 
                     {/* Minutes */}
-                    <div className="flex-1 border-r border-[#24262B]">
-                        <h2 className="text-sm font-semibold text-muted">
+                    <div className="flex-1 border-r border-[#24262B] px-2 sm:px-4">
+                        <h2 className="text-xs font-semibold text-muted sm:text-sm">
                             Minutes
                         </h2>
 
-                        <p className="mt-1 text-xl font-bold">
+                        <p className="mt-1 text-lg font-bold sm:text-xl">
                             {totalMinutes}
                         </p>
                     </div>
 
                     {/* Calories */}
-                    <div className="flex-1">
-                        <h2 className="text-sm font-semibold text-muted">
+                    <div className="flex-1 pl-2 sm:pl-4">
+                        <h2 className="text-xs font-semibold text-muted sm:text-sm">
                             Calories
                         </h2>
 
-                        <p className="mt-1 text-xl font-bold">
+                        <p className="mt-1 text-lg font-bold sm:text-xl">
                             {totalCalories}
                         </p>
                     </div>
@@ -91,16 +91,16 @@ export default function Page() {
                 </div>
 
                 {/* Tabs & Sort Header */}
-                <div className="flex items-center justify-between">
+                <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
 
                     {/* Tabs */}
-                    <div className="flex items-center gap-1 rounded-xl border border-gray-800 bg-[#15171D] p-1.5">
+                    <div className="flex w-fit items-center gap-1 rounded-xl border border-gray-800 bg-[#15171D] p-1.5">
 
                         {/* Today's Plan */}
                         <button
                             type="button"
                             onClick={() => setActiveTab('today')}
-                            className={`rounded-lg px-4 py-2 text-xs font-semibold transition-all ${activeTab === 'today'
+                            className={`rounded-lg px-3 py-2 text-xs font-semibold transition-all sm:px-4 ${activeTab === 'today'
                                 ? 'bg-[#21242D] text-white shadow'
                                 : 'text-muted hover:text-white'
                                 }`}
@@ -112,7 +112,7 @@ export default function Page() {
                         <button
                             type="button"
                             onClick={() => setActiveTab('saved')}
-                            className={`rounded-lg px-4 py-2 text-xs font-semibold transition-all ${activeTab === 'saved'
+                            className={`rounded-lg px-3 py-2 text-xs font-semibold transition-all sm:px-4 ${activeTab === 'saved'
                                 ? 'bg-[#21242D] text-white shadow'
                                 : 'text-muted hover:text-white'
                                 }`}
@@ -123,10 +123,10 @@ export default function Page() {
                     </div>
 
                     {/* Sort Dropdown */}
-                    <div>
+                    <div className="w-full sm:w-auto">
                         <select
                             defaultValue="Duration"
-                            className="rounded-xl border border-gray-800 bg-[#15171D] px-3 py-2 text-xs text-white outline-none"
+                            className="w-full rounded-xl border border-gray-800 bg-[#15171D] px-3 py-2 text-xs text-white outline-none sm:w-auto"
                         >
                             <option value="Duration">
                                 Sort By: Duration
