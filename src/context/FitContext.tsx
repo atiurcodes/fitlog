@@ -3,18 +3,23 @@ import { WorkoutType } from "@/type";
 import { createContext, ReactNode, useState } from "react"
 
 export interface FitContextType {
-    plan: WorkoutType[];
-    setPlan: React.Dispatch<React.SetStateAction<WorkoutType[]>>;
+    plans: WorkoutType[];
+    setPlans: React.Dispatch<React.SetStateAction<WorkoutType[]>>;
+    saves: WorkoutType[];
+    setSaves: React.Dispatch<React.SetStateAction<WorkoutType[]>>;
 }
 
 export const FitContext = createContext<FitContextType | null>(null);
 
 export default function FitProvider({ children }: { children: ReactNode }) {
-    const [plan, setPlan] = useState<WorkoutType[]>([]);
+    const [plans, setPlans] = useState<WorkoutType[]>([]);
+    const [saves, setSaves] = useState<WorkoutType[]>([]);
 
     const sharedData = {
-        plan,
-        setPlan,
+        plans,
+        setPlans,
+        saves,
+        setSaves
     }
 
     return (

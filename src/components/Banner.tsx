@@ -9,7 +9,7 @@ const Banner = () => {
 
                 {/* Banner Content */}
                 <div className="w-full text-center md:w-1/2 md:text-left">
-                    <h4 className="mb-3 text-sm font-semibold tracking-widest text-primary">
+                    <h4 className="mb-3 text-sm font-semibold tracking-widest text-brand">
                         WORKOUT LIBRARY
                     </h4>
 
@@ -17,12 +17,12 @@ const Banner = () => {
                         TRAIN WITH INTENT. LOG EVERY SET.
                     </h2>
 
-                    <p className="mt-5 max-w-xl text-base leading-7 text-secondary sm:text-lg">
+                    <p className="mt-5 max-w-xl text-base leading-7 text-muted sm:text-lg">
                         FitLog is a dark, no-nonsense gym companion: pick a lift,
                         lock it into today's plan, and watch the week's work add up.
                     </p>
 
-                    <button className="mt-7 rounded-lg bg-primary px-6 py-3 font-semibold text-black transition-all duration-300 hover:scale-105 hover:shadow-lg">
+                    <button className="mt-7 rounded-lg bg-brand px-6 py-3 font-semibold text-black transition-all duration-300 hover:scale-105 hover:shadow-lg">
                         BROWSE WORKOUTS
                     </button>
                 </div>

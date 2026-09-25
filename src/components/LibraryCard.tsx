@@ -11,7 +11,7 @@ export default function LibraryCard({ data }: LibraryCardProps) {
     return (
         <section className="py-10">
             <Link href={`/workouts/${data.id}`} >
-                <div className="bg-[#15171D] rounded-xl border border-transparent hover:border-primary transition-all duration-300 overflow-hidden">
+                <div className="bg-[#15171D] rounded-xl border border-transparent hover:border-brand transition-all duration-300 overflow-hidden">
                     <div>
                         <Image
                             src={data.image}
@@ -29,7 +29,7 @@ export default function LibraryCard({ data }: LibraryCardProps) {
                             {data.muscleGroups.map((muscle, index) => (
                                 <span
                                     key={index}
-                                    className="text-black bg-primary px-3 sm:px-4 py-1 rounded-full font-bold text-sm sm:text-base"
+                                    className="text-black bg-brand px-3 sm:px-4 py-1 rounded-full font-bold text-sm sm:text-base"
                                 >
                                     {muscle}
                                 </span>
@@ -42,7 +42,7 @@ export default function LibraryCard({ data }: LibraryCardProps) {
                                 {data.name}
                             </h2>
 
-                            <p className="text-secondary text-sm sm:text-base">
+                            <p className="text-muted text-sm sm:text-base">
                                 {data.equipment}
                             </p>
                         </div>
@@ -51,7 +51,7 @@ export default function LibraryCard({ data }: LibraryCardProps) {
                         <div className="w-full border-t-2 border-[#24262B]"></div>
 
                         {/* Workout Info */}
-                        <div className="flex flex-wrap gap-x-5 gap-y-3 sm:gap-x-8 items-center text-secondary text-sm sm:text-base">
+                        <div className="flex flex-wrap gap-x-5 gap-y-3 sm:gap-x-8 items-center text-muted text-sm sm:text-base">
                             <span className="flex items-center gap-2">
                                 <FaClock />
                                 {data.duration}

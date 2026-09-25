@@ -1,21 +1,16 @@
 @import "tailwindcss";
 
-:root {
-  --primary: #c2f800;
-  --secondary: #9ca3af;
-  --background: #000000;
-  --foreground: #ffffff;
-}
+@plugin "daisyui";
 
 @theme {
-    --color-primary: var(--primary);
-    --color-secondary: var(--secondary);
-    --color-background: var(--background);
-    --color-foreground: var(--foreground);
+    --color-brand: #c2f800;
+    --color-muted: #9ca3af;
+    --color-background: #000000;
+    --color-foreground: #ffffff;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-inter), sans-serif;
+    background: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-inter), sans-serif;
 }

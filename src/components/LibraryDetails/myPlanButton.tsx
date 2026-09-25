@@ -9,14 +9,14 @@ const MyPlanButton = ({ singleData }: { singleData: WorkoutType }) => {
     if (!fitContext) {
         throw new Error("ReadButton must be used inside BooksProvider");
     }
-    const { plan, setPlan } = fitContext;
+    const { plans, setPlans } = fitContext;
     const handleAddPlan = (singleData: WorkoutType) => {
-        setPlan([...plan, singleData]);
+        setPlans([...plans, singleData]);
     }
     return (
         <div>
             <button onClick={() => handleAddPlan(singleData)}
-                className="flex items-center gap-2 mt-7 rounded-lg bg-primary cursor-pointer px-6 py-3 font-semibold text-black 
+                className="flex items-center gap-2 mt-7 rounded-lg bg-brand cursor-pointer px-6 py-3 font-semibold text-black 
                 transition-all duration-300 hover:scale-105 hover:shadow-lg">
                 <FaShoppingBag />Add to today's plan
             </button>
