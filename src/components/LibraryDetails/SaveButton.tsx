@@ -11,6 +11,12 @@ const SaveButton = ({ singleData }: { singleData: WorkoutType }) => {
     }
     const { saves, setSaves } = fitContext;
     const handleSavePlan = (singleData: WorkoutType) => {
+        const alreadyExists = saves.some(
+            (plan) => plan.id === singleData.id
+        );
+        if (alreadyExists) {
+            return;
+        }
         setSaves([...saves, singleData]);
     }
     return (

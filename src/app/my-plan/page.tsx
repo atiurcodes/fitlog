@@ -143,6 +143,7 @@ export default function Page() {
                             <MyPlanCard
                                 key={plan.id}
                                 plan={plan}
+                                activeTab={activeTab}
                             />
                         ))
 
