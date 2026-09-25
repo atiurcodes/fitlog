@@ -5,6 +5,7 @@ import { FitContext } from '@/context/FitContext';
 import { WorkoutType } from '@/type';
 import { use } from 'react';
 import { FaShoppingBag } from 'react-icons/fa';
+import { toast } from 'react-toastify';
 
 const MyPlanButton = ({
     singleData,
@@ -25,11 +26,12 @@ const MyPlanButton = ({
         );
 
         if (alreadyExists) {
-
+            toast.info(`You have added to your readlist.`);
             return;
         }
 
         setPlans([...plans, singleData]);
+        toast.success(`You have added a plan to your readlist.`);
 
     };
 

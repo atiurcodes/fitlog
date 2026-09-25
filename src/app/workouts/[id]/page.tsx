@@ -1,4 +1,5 @@
-import LibraryDetails from "@/components/LibraryDetails";
+
+import LibraryDetails from "@/components/Workouts/LibraryDetails";
 import { WorkoutType } from "@/type";
 
 export interface PageProps {

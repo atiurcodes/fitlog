@@ -5,7 +5,9 @@ import MyPlanCard from "@/components/MyPlanCard";
 import NoData from "@/components/NoData";
 import { FitContext } from "@/context/FitContext";
 import { WorkoutType } from "@/type";
-import { use } from "react";
+import { use, useState } from "react";
+
+type SortOption = "Duration" | "Calories" | "Rating";
 
 export default function Page() {
     const fitContext = use(FitContext);
@@ -21,8 +23,28 @@ export default function Page() {
         setActiveTab,
     } = fitContext;
 
-    // Active tab অনুযায়ী data select হবে
-    const currentPlans = activeTab === 'today' ? plans : saves;
+    // Sort state
+    const [sortBy, setSortBy] = useState<SortOption>("Duration");
+
+    // Active tab অনুযায়ী current list
+    const currentPlans = activeTab === "today" ? plans : saves;
+
+    // Current list-এর উপর sorting
+    const sortedPlans = [...currentPlans].sort((a, b) => {
+        switch (sortBy) {
+            case "Duration":
+                return a.duration - b.duration;
+
+            case "Calories":
+                return a.caloriesBurned - b.caloriesBurned;
+
+            case "Rating":
+                return a.rating - b.rating;
+
+            default:
+                return 0;
+        }
+    });
 
     // Dynamic metrics
     const totalExercises = currentPlans.length;
@@ -99,10 +121,10 @@ export default function Page() {
                         {/* Today's Plan */}
                         <button
                             type="button"
-                            onClick={() => setActiveTab('today')}
-                            className={`rounded-lg px-3 py-2 text-xs font-semibold transition-all sm:px-4 ${activeTab === 'today'
-                                ? 'bg-[#21242D] text-white shadow'
-                                : 'text-muted hover:text-white'
+                            onClick={() => setActiveTab("today")}
+                            className={`rounded-lg px-3 py-2 text-xs font-semibold transition-all sm:px-4 ${activeTab === "today"
+                                    ? "bg-[#21242D] text-white shadow"
+                                    : "text-muted hover:text-white"
                                 }`}
                         >
                             Today's plan
@@ -111,10 +133,10 @@ export default function Page() {
                         {/* Saved */}
                         <button
                             type="button"
-                            onClick={() => setActiveTab('saved')}
-                            className={`rounded-lg px-3 py-2 text-xs font-semibold transition-all sm:px-4 ${activeTab === 'saved'
-                                ? 'bg-[#21242D] text-white shadow'
-                                : 'text-muted hover:text-white'
+                            onClick={() => setActiveTab("saved")}
+                            className={`rounded-lg px-3 py-2 text-xs font-semibold transition-all sm:px-4 ${activeTab === "saved"
+                                    ? "bg-[#21242D] text-white shadow"
+                                    : "text-muted hover:text-white"
                                 }`}
                         >
                             Saved
@@ -123,19 +145,32 @@ export default function Page() {
                     </div>
 
                     {/* Sort Dropdown */}
-                    <div className="w-full sm:w-auto">
+                    <div className="flex w-full items-center gap-2 text-xs sm:w-auto">
+
+                        <p className="text-muted">
+                            Sort By
+                        </p>
+
                         <select
-                            defaultValue="Duration"
-                            className="w-full rounded-xl border border-gray-800 bg-[#15171D] px-3 py-2 text-xs text-white outline-none sm:w-auto"
+                            value={sortBy}
+                            onChange={(e) =>
+                                setSortBy(e.target.value as SortOption)
+                            }
+                            className="w-full rounded-xl border border-gray-800 bg-[#15171D] px-3 py-2 text-xs text-muted outline-none sm:w-auto"
                         >
                             <option value="Duration">
-                                Sort By: Duration
+                                Duration
                             </option>
 
                             <option value="Calories">
-                                Sort By: Calories
+                                Calories
+                            </option>
+
+                            <option value="Rating">
+                                Rating
                             </option>
                         </select>
+
                     </div>
 
                 </div>
@@ -143,9 +178,9 @@ export default function Page() {
                 {/* Card Display Area */}
                 <div className="space-y-4 pt-2">
 
-                    {currentPlans.length > 0 ? (
+                    {sortedPlans.length > 0 ? (
 
-                        currentPlans.map((plan: WorkoutType) => (
+                        sortedPlans.map((plan: WorkoutType) => (
                             <MyPlanCard
                                 key={plan.id}
                                 plan={plan}

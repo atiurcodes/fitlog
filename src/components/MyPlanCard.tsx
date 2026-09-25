@@ -6,6 +6,7 @@ import { WorkoutType } from "@/type";
 import Image from "next/image";
 import Link from "next/link";
 import { use } from "react";
+import { toast } from "react-toastify";
 
 export interface MyPlanCardProps {
     plan: WorkoutType;
@@ -28,7 +29,12 @@ export default function MyPlanCard({
         saves,
         setPlans,
         setSaves,
+        completedPlans,
+        setCompletedPlans,
     } = fitContext;
+
+    // Check whether this workout is already completed
+    const isDone = completedPlans.includes(plan.id);
 
     const handleRemove = () => {
 
@@ -45,6 +51,19 @@ export default function MyPlanCard({
 
             setSaves(updatedSaves);
         }
+    };
+
+    const handleMarkAsDone = () => {
+
+        // Prevent adding the same workout twice
+        if (isDone) return;
+
+        setCompletedPlans((prev) => [
+            ...prev,
+            plan.id
+        ]);
+
+        toast.success(`${plan.name} marked as done!`);
     };
 
     return (
@@ -119,7 +138,7 @@ export default function MyPlanCard({
                                     className="h-3.5 w-3.5 shrink-0 fill-current"
                                     viewBox="0 0 24 24"
                                 >
-                                    <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                                    <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 5.82 21l5.46-4.73L5.82 21z" />
                                 </svg>
 
                                 <span className="font-medium text-gray-300">
@@ -146,7 +165,12 @@ export default function MyPlanCard({
                     {activeTab === 'today' && (
                         <button
                             type="button"
-                            className="flex items-center gap-1.5 rounded-full bg-lime-400 px-3 py-2 text-xs font-bold text-black transition-all duration-200 hover:bg-lime-300 sm:px-4"
+                            onClick={handleMarkAsDone}
+                            disabled={isDone}
+                            className={`flex items-center gap-1.5 rounded-full px-3 py-2 text-xs font-bold transition-all duration-200 sm:px-4 ${isDone
+                                ? "cursor-default bg-gray-700 text-gray-300"
+                                : "bg-lime-400 text-black hover:bg-lime-300"
+                                }`}
                         >
                             <svg
                                 className="h-4 w-4 stroke-[3]"
@@ -161,7 +185,7 @@ export default function MyPlanCard({
                                 />
                             </svg>
 
-                            Mark as Done
+                            {isDone ? "Done" : "Mark as Done"}
                         </button>
                     )}
 

@@ -1,9 +1,8 @@
 
 import { WorkoutType } from "@/type"
 import Image from "next/image";
-import { FiBookmark } from "react-icons/fi";
-import MyPlanButton from "./LibraryDetails/myPlanButton";
-import SaveButton from "./LibraryDetails/SaveButton";
+import MyPlanButton from "../LibraryDetails/myPlanButton";
+import SaveButton from "../LibraryDetails/SaveButton";
 
 export interface LibraryDetailsProps {
     singleData: WorkoutType;

@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import FitProvider from "@/context/FitContext";
+import { ToastContainer } from "react-toastify";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -22,6 +23,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <FitProvider>
           <Navbar />
           <main>{children}</main>
+          <ToastContainer />
         </FitProvider>
 
       </body>
