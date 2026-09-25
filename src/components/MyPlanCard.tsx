@@ -23,7 +23,6 @@ export default function MyPlanCard({
     if (!fitContext) {
         throw new Error("MyPlanCard must be used inside FitProvider");
     }
-
     const {
         plans,
         saves,
@@ -38,6 +37,11 @@ export default function MyPlanCard({
 
     const handleRemove = () => {
 
+        // Remove completed status when workout is removed
+        setCompletedPlans((prev) =>
+            prev.filter((id) => id !== plan.id)
+        );
+
         if (activeTab === 'today') {
             const updatedPlans = plans.filter(
                 (item) => item.id !== plan.id
@@ -51,6 +55,8 @@ export default function MyPlanCard({
 
             setSaves(updatedSaves);
         }
+
+        toast.error(`${plan.name} removed from your plan!`);
     };
 
     const handleMarkAsDone = () => {
@@ -65,6 +71,7 @@ export default function MyPlanCard({
 
         toast.success(`${plan.name} marked as done!`);
     };
+
 
     return (
         <section>
@@ -167,7 +174,7 @@ export default function MyPlanCard({
                             type="button"
                             onClick={handleMarkAsDone}
                             disabled={isDone}
-                            className={`flex items-center gap-1.5 rounded-full px-3 py-2 text-xs font-bold transition-all duration-200 sm:px-4 ${isDone
+                            className={`cursor-pointer flex items-center gap-1.5 rounded-full px-3 py-2 text-xs font-bold transition-all duration-200 sm:px-4 ${isDone
                                 ? "cursor-default bg-gray-700 text-gray-300"
                                 : "bg-lime-400 text-black hover:bg-lime-300"
                                 }`}

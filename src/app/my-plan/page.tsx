@@ -122,9 +122,9 @@ export default function Page() {
                         <button
                             type="button"
                             onClick={() => setActiveTab("today")}
-                            className={`rounded-lg px-3 py-2 text-xs font-semibold transition-all sm:px-4 ${activeTab === "today"
-                                    ? "bg-[#21242D] text-white shadow"
-                                    : "text-muted hover:text-white"
+                            className={`rounded-lg px-3 py-2 text-xs font-semibold transition-all cursor-pointer sm:px-4 ${activeTab === "today"
+                                ? "bg-[#21242D] text-white shadow"
+                                : "text-muted hover:text-white"
                                 }`}
                         >
                             Today's plan
@@ -134,9 +134,9 @@ export default function Page() {
                         <button
                             type="button"
                             onClick={() => setActiveTab("saved")}
-                            className={`rounded-lg px-3 py-2 text-xs font-semibold transition-all sm:px-4 ${activeTab === "saved"
-                                    ? "bg-[#21242D] text-white shadow"
-                                    : "text-muted hover:text-white"
+                            className={`rounded-lg px-3 py-2 text-xs font-semibold transition-all cursor-pointer sm:px-4 ${activeTab === "saved"
+                                ? "bg-[#21242D] text-white shadow"
+                                : "text-muted hover:text-white"
                                 }`}
                         >
                             Saved

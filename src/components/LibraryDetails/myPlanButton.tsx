@@ -26,12 +26,12 @@ const MyPlanButton = ({
         );
 
         if (alreadyExists) {
-            toast.info(`You have added to your readlist.`);
+            toast.info(`${singleData.name} is already in your plan.`);
             return;
         }
 
         setPlans([...plans, singleData]);
-        toast.success(`You have added a plan to your readlist.`);
+        toast.success(`${singleData.name} added to your plan!`);
 
     };
 

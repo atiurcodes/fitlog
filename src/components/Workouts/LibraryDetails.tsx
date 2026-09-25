@@ -45,7 +45,7 @@ export default function LibraryDetails({ singleData }: LibraryDetailsProps) {
 
                     <div className="my-6 rounded-xl bg-[#15171D] p-3 sm:p-4">
 
-                        <div className="flex items-center justify-between gap-4 p-2">
+                        <div className="flex items-center justify-between gap-4 border-b border-gray-700/50 p-2">
                             <h2 className="text-sm font-bold text-muted sm:text-xl">
                                 EQUIPMENT
                             </h2>
@@ -54,7 +54,7 @@ export default function LibraryDetails({ singleData }: LibraryDetailsProps) {
                             </p>
                         </div>
 
-                        <div className="flex items-center justify-between gap-4 p-2">
+                        <div className="flex items-center justify-between gap-4 border-b border-gray-700/50 p-2">
                             <h2 className="text-sm font-bold text-muted sm:text-xl">
                                 DIFFICULTY
                             </h2>
@@ -63,7 +63,7 @@ export default function LibraryDetails({ singleData }: LibraryDetailsProps) {
                             </p>
                         </div>
 
-                        <div className="flex items-center justify-between gap-4 p-2">
+                        <div className="flex items-center justify-between gap-4 border-b border-gray-700/50 p-2">
                             <h2 className="text-sm font-bold text-muted sm:text-xl">
                                 SETS
                             </h2>
@@ -72,7 +72,7 @@ export default function LibraryDetails({ singleData }: LibraryDetailsProps) {
                             </p>
                         </div>
 
-                        <div className="flex items-center justify-between gap-4 p-2">
+                        <div className="flex items-center justify-between gap-4 border-b border-gray-700/50 p-2">
                             <h2 className="text-sm font-bold text-muted sm:text-xl">
                                 REPS
                             </h2>
@@ -81,7 +81,7 @@ export default function LibraryDetails({ singleData }: LibraryDetailsProps) {
                             </p>
                         </div>
 
-                        <div className="flex items-center justify-between gap-4 p-2">
+                        <div className="flex items-center justify-between gap-4 border-b border-gray-700/50 p-2">
                             <h2 className="text-sm font-bold text-muted sm:text-xl">
                                 DURATION
                             </h2>
@@ -90,7 +90,7 @@ export default function LibraryDetails({ singleData }: LibraryDetailsProps) {
                             </p>
                         </div>
 
-                        <div className="flex items-center justify-between gap-4 p-2">
+                        <div className="flex items-center justify-between gap-4 border-b border-gray-700/50 p-2">
                             <h2 className="text-sm font-bold text-muted sm:text-xl">
                                 CALORIES
                             </h2>
@@ -111,12 +111,14 @@ export default function LibraryDetails({ singleData }: LibraryDetailsProps) {
                     </div>
 
                     <div>
-                        <h2>INSTRUCTIONS</h2>
+                        <h2 className="text-white font-bold text-xl">INSTRUCTIONS</h2>
 
-                        <ol className="space-y-2 pl-4 text-sm sm:text-base">
+                        <ol className="list-decimal space-y-2 pl-6 text-sm sm:text-base">
                             {
                                 singleData.instructions.map((ins, index) => (
-                                    <li key={index}>{ins}</li>
+                                    <li key={index} className="text-muted">
+                                        {ins}
+                                    </li>
                                 ))
                             }
                         </ol>

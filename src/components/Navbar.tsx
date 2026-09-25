@@ -19,28 +19,20 @@ const Navbar = () => {
     }
 
     const {
-        activeTab,
-        setActiveTab,
         plans,
-        saves
-
+        saves,
     } = fitContext;
 
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+    // Navbar Plan/Saved active state
+    const [activeNav, setActiveNav] = useState<"plan" | "saved">("plan");
 
     const isWorkoutsActive =
         pathname === "/" || pathname.startsWith("/workouts");
 
     const isMyPlanActive =
         pathname.startsWith("/my-plan");
-
-    const handlePlanClick = () => {
-        setActiveTab("today");
-    };
-
-    const handleSavedClick = () => {
-        setActiveTab("saved");
-    };
 
     const links = (
         <>
@@ -102,28 +94,36 @@ const Navbar = () => {
                     <div className="hidden items-center gap-5 md:flex">
 
                         {/* Plan */}
-                        <Link href="/my-plan" onClick={handlePlanClick}
-                            className={`rounded-full px-4 py-2 transition-all duration-200 ${isMyPlanActive &&
-                                activeTab === "today"
+                        <Link
+                            href="/my-plan"
+                            onClick={() => setActiveNav("plan")}
+                            className={`rounded-full px-4 py-2 transition-all duration-200 ${activeNav === "plan"
                                 ? "bg-brand/20 text-brand"
                                 : "text-muted hover:text-brand"
-                                }`}>
+                                }`}
+                        >
                             <span>Plan</span>
-                            <span className="ml-1 bg-brand px-2 text-black rounded-full">{plans.length}</span>
+
+                            <span className="ml-1 rounded-full bg-brand px-2 text-black">
+                                {plans.length}
+                            </span>
                         </Link>
 
                         {/* Saved */}
                         <Link
                             href="/my-plan"
-                            onClick={handleSavedClick}
-                            className={`rounded-full px-4 py-2 transition-all duration-200 ${isMyPlanActive &&
-                                activeTab === "saved"
+                            onClick={() => setActiveNav("saved")}
+                            className={`rounded-full px-4 py-2 transition-all duration-200 ${activeNav === "saved"
                                 ? "bg-brand/20 text-brand"
                                 : "text-muted hover:text-brand"
-                                }`}>
+                                }`}
+                        >
                             <span>Saved</span>
+
                             {saves.length > 0 && (
-                                <span className="ml-1 px-2 text-white rounded-full">{saves.length}</span>
+                                <span className="ml-1 rounded-full px-2 text-white">
+                                    {saves.length}
+                                </span>
                             )}
                         </Link>
 
@@ -189,11 +189,10 @@ const Navbar = () => {
                                 <Link
                                     href="/my-plan"
                                     onClick={() => {
-                                        handlePlanClick();
+                                        setActiveNav("plan");
                                         setIsMenuOpen(false);
                                     }}
-                                    className={`block w-full rounded-lg px-3 py-3 text-left transition-all duration-200 hover:translate-x-1 hover:bg-white/10 ${isMyPlanActive &&
-                                        activeTab === "today"
+                                    className={`block w-full rounded-lg px-3 py-3 text-left transition-all duration-200 hover:translate-x-1 hover:bg-white/10 ${activeNav === "plan"
                                         ? "bg-brand/20 text-brand"
                                         : "text-white"
                                         }`}
@@ -207,11 +206,10 @@ const Navbar = () => {
                                 <Link
                                     href="/my-plan"
                                     onClick={() => {
-                                        handleSavedClick();
+                                        setActiveNav("saved");
                                         setIsMenuOpen(false);
                                     }}
-                                    className={`block w-full rounded-lg px-3 py-3 text-left transition-all duration-200 hover:translate-x-1 hover:bg-white/10 ${isMyPlanActive &&
-                                        activeTab === "saved"
+                                    className={`block w-full rounded-lg px-3 py-3 text-left transition-all duration-200 hover:translate-x-1 hover:bg-white/10 ${activeNav === "saved"
                                         ? "bg-brand/20 text-brand"
                                         : "text-white"
                                         }`}

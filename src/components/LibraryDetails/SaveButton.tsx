@@ -24,12 +24,12 @@ const SaveButton = ({ singleData }: { singleData: WorkoutType }) => {
         );
 
         if (alreadyExists) {
-            toast.info("This workout is already saved.");
+            toast.info(`${singleData.name} is already saved.`);
             return;
         }
 
         setSaves([...saves, singleData]);
-        toast.success("Workout saved successfully.");
+        toast.success(`${singleData.name} saved successfully!`);
     };
 
     return (
@@ -37,7 +37,7 @@ const SaveButton = ({ singleData }: { singleData: WorkoutType }) => {
             <button
                 type="button"
                 onClick={() => handleSavePlan(singleData)}
-                className="mt-7 flex cursor-pointer items-center gap-2 rounded-lg bg-brand px-6 py-3 font-semibold text-black transition-all duration-300 hover:scale-105 hover:shadow-lg"
+                className="mt-7 flex cursor-pointer border-2 border-[#15171D] items-center gap-2 rounded-lg px-6 py-3 font-semibold text-white transition-all duration-300 hover:scale-105 hover:shadow-lg"
             >
                 <FiBookmark />
                 Save for later
