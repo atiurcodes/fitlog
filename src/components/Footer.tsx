@@ -21,7 +21,7 @@ export default function Footer() {
                 </Link>
 
                 {/* Copyright */}
-                <p className="text-center text-sm text-slate-400">
+                <p className="text-center text-sm text-muted">
                     © 2026 FitLog — Workout Library. Train hard, log honest.
                 </p>
             </div>

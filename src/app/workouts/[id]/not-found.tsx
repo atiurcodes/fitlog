@@ -5,7 +5,7 @@ export default function NotFound() {
     return (
         <main className="flex min-h-[70vh] items-center justify-center px-4">
             <div className="w-full max-w-xl text-center">
-                <p className="text-sm font-semibold uppercase tracking-[0.3em] text-orange-400">
+                <p className="text-sm font-semibold uppercase tracking-[0.3em] text-brand">
                     FitLog
                 </p>
 
@@ -25,7 +25,7 @@ export default function NotFound() {
 
                 <Link
                     href="/"
-                    className="mt-8 inline-flex items-center rounded-lg bg-orange-500 px-6 py-3 font-semibold text-white transition hover:bg-orange-600"
+                    className="mt-8 inline-flex items-center rounded-lg bg-brand px-6 py-3 font-semibold text-black transition hover:bg-brand/50"
                 >
                     Back to Library
                 </Link>

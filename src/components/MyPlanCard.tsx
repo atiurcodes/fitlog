@@ -108,7 +108,7 @@ export default function MyPlanCard({
                         <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5 text-xs text-gray-300 sm:mt-1 sm:gap-3.5">
 
                             {/* Duration */}
-                            <span className="flex items-center gap-1.5 text-lime-400">
+                            <span className="flex items-center gap-1.5 text-brand">
                                 <svg
                                     className="h-3.5 w-3.5 shrink-0"
                                     fill="none"
@@ -129,7 +129,7 @@ export default function MyPlanCard({
                             </span>
 
                             {/* Calories */}
-                            <span className="flex items-center gap-1.5 text-lime-400">
+                            <span className="flex items-center gap-1.5 text-brand">
                                 <svg
                                     className="h-3.5 w-3.5 shrink-0"
                                     fill="currentColor"
@@ -144,7 +144,7 @@ export default function MyPlanCard({
                             </span>
 
                             {/* Rating */}
-                            <span className="flex items-center gap-1.5 text-lime-400">
+                            <span className="flex items-center gap-1.5 text-brand">
                                 <svg
                                     className="h-3.5 w-3.5 shrink-0 fill-current"
                                     viewBox="0 0 24 24"
@@ -178,7 +178,7 @@ export default function MyPlanCard({
                             type="button"
                             onClick={handleMarkAsDone}
                             disabled={isDone}
-                            className={`cursor-pointer flex items-center gap-1.5 rounded-full px-3 py-2 text-xs font-bold transition-all duration-200 sm:px-4 ${isDone
+                            className={`${isDone ? 'cursor-not-allowed' : 'cursor-pointer'} flex items-center gap-1.5 rounded-full px-3 py-2 text-xs font-bold transition-all duration-200 sm:px-4 ${isDone
                                 ? "cursor-default bg-gray-700 text-gray-300"
                                 : "bg-lime-400 text-black hover:bg-lime-300"
                                 }`}

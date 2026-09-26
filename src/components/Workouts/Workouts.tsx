@@ -3,9 +3,7 @@ import { WorkoutType } from "@/type";
 import LibraryCard from "./WorkoutsCard";
 
 const PromiseData = async (): Promise<WorkoutType[]> => {
-    const res = await fetch(
-        "https://api.abcz.workers.dev/api/fitlog"
-    );
+    const res = await fetch("https://api.abcz.workers.dev/api/fitlog");
 
     if (!res.ok) {
         throw new Error("Failed to fetch workout data.");
@@ -21,12 +19,12 @@ export default async function Workouts() {
 
     return (
         <section className="container mx-auto px-4" id="library">
-            <div className="space-y-1 py-4">
+            <div className="space-y-1">
                 <h2 className="text-2xl font-bold leading-tight text-white lg:text-3xl">
                     THE LIBRARY
                 </h2>
 
-                <p className="text-muted">
+                <p className="text-muted mb-6">
                     Twelve lifts covering every major muscle group.
                 </p>
 

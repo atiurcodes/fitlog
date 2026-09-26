@@ -1,16 +1,15 @@
-
 "use client";
-
 import logo from "@/assets/logo.png";
 import { FitContext } from "@/context/FitContext";
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import { use } from "react";
 import { useState } from "react";
 
 const Navbar = () => {
     const pathname = usePathname();
+    const searchParams = useSearchParams();
 
     const fitContext = use(FitContext);
 
@@ -18,17 +17,17 @@ const Navbar = () => {
         throw new Error("Navbar must be used inside FitProvider");
     }
 
-    const {
-        plans,
-        saves,
-    } = fitContext;
+    const { plans, saves } = fitContext;
 
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-    // Navbar Plan / Saved visual selection
-    const [activeNavButton, setActiveNavButton] = useState<
-        "plan" | "saved" | null
-    >(null);
+    const activeTab = searchParams.get("tab");
+
+    const isPlanActive =
+        pathname.startsWith("/my-plan") && activeTab !== "saved";
+
+    const isSavedActive =
+        pathname.startsWith("/my-plan") && activeTab === "saved";
 
     const isWorkoutsActive =
         pathname === "/" || pathname.startsWith("/workouts");
@@ -52,7 +51,7 @@ const Navbar = () => {
 
             <li>
                 <Link
-                    href="/my-plan"
+                    href="/my-plan?tab=today"
                     className={`transition-colors duration-200 ${isMyPlanActive
                         ? "rounded-full bg-brand/20 px-4 py-2 text-brand"
                         : "text-white hover:text-brand"
@@ -72,7 +71,10 @@ const Navbar = () => {
                 <div className="flex items-center justify-between">
 
                     {/* Logo */}
-                    <Link href="/" className="flex items-center gap-2">
+                    <Link
+                        href="/"
+                        className="flex items-center gap-2"
+                    >
                         <Image
                             src={logo}
                             alt="Fitlog"
@@ -97,14 +99,11 @@ const Navbar = () => {
 
                         {/* Plan */}
                         <Link
-                            href="/my-plan"
-                            onClick={() => setActiveNavButton("plan")}
-                            className={`flex items-center gap-2 rounded-full px-3 py-1.5 text-sm transition-colors duration-200 ${pathname.startsWith("/my-plan") &&
-                                activeNavButton === "plan"
+                            href="/my-plan?tab=today"
+                            className={`flex items-center gap-2 rounded-full px-3 py-1.5 text-sm transition-colors duration-200 ${isPlanActive
                                 ? "bg-brand/20 text-brand"
                                 : "text-white hover:text-brand"
-                                }`}
-                        >
+                                }`}>
                             <span>Plan</span>
 
                             <span className="rounded-full bg-brand px-2.5 py-0.5 text-sm font-semibold text-black">
@@ -114,14 +113,11 @@ const Navbar = () => {
 
                         {/* Saved */}
                         <Link
-                            href="/my-plan"
-                            onClick={() => setActiveNavButton("saved")}
-                            className={`flex items-center gap-2 rounded-full px-3 py-1.5 text-sm transition-colors duration-200 ${pathname.startsWith("/my-plan") &&
-                                activeNavButton === "saved"
+                            href="/my-plan?tab=saved"
+                            className={`flex items-center gap-2 rounded-full px-3 py-1.5 text-sm transition-colors duration-200 ${isSavedActive
                                 ? "bg-brand/20 text-brand"
                                 : "text-white hover:text-brand"
-                                }`}
-                        >
+                                }`}>
                             <span>Saved</span>
 
                             <span className="rounded-full border border-brand px-2.5 py-0.5 text-sm font-semibold text-brand">
@@ -134,7 +130,9 @@ const Navbar = () => {
                     {/* Mobile Menu Button */}
                     <button
                         type="button"
-                        onClick={() => setIsMenuOpen(!isMenuOpen)}
+                        onClick={() =>
+                            setIsMenuOpen(!isMenuOpen)
+                        }
                         className="text-2xl text-white md:hidden"
                         aria-label="Toggle menu"
                     >
@@ -163,63 +161,55 @@ const Navbar = () => {
                             <li>
                                 <Link
                                     href="/"
-                                    onClick={() => setIsMenuOpen(false)}
+                                    onClick={() =>
+                                        setIsMenuOpen(false)
+                                    }
                                     className={`block rounded-lg px-3 py-3 transition-all duration-200 hover:translate-x-1 hover:bg-white/10 ${isWorkoutsActive
                                         ? "bg-white/10 text-brand"
                                         : "text-white"
-                                        }`}
-                                >
-                                    Workouts
+                                        }`}>Workouts
                                 </Link>
                             </li>
 
                             {/* My Plan */}
                             <li>
                                 <Link
-                                    href="/my-plan"
-                                    onClick={() => setIsMenuOpen(false)}
+                                    href="/my-plan?tab=today"
+                                    onClick={() =>
+                                        setIsMenuOpen(false)
+                                    }
                                     className={`block rounded-lg px-3 py-3 transition-all duration-200 hover:translate-x-1 hover:bg-white/10 ${isMyPlanActive
                                         ? "bg-white/10 text-brand"
                                         : "text-white"
-                                        }`}
-                                >
-                                    My Plan
+                                        }`}>My Plan
                                 </Link>
                             </li>
 
                             {/* Plan */}
                             <li>
                                 <Link
-                                    href="/my-plan"
-                                    onClick={() => {
-                                        setActiveNavButton("plan");
-                                        setIsMenuOpen(false);
-                                    }}
-                                    className={`block w-full rounded-lg px-3 py-3 text-left transition-all duration-200 hover:translate-x-1 hover:bg-white/10 ${pathname.startsWith("/my-plan") &&
-                                        activeNavButton === "plan"
+                                    href="/my-plan?tab=today"
+                                    onClick={() =>
+                                        setIsMenuOpen(false)
+                                    }
+                                    className={`block w-full rounded-lg px-3 py-3 text-left transition-all duration-200 hover:translate-x-1 hover:bg-white/10 ${isPlanActive
                                         ? "bg-white/10 text-brand"
                                         : "text-white"
-                                        }`}
-                                >
-                                    Plan
+                                        }`}>Plan
                                 </Link>
                             </li>
 
                             {/* Saved */}
                             <li>
                                 <Link
-                                    href="/my-plan"
-                                    onClick={() => {
-                                        setActiveNavButton("saved");
-                                        setIsMenuOpen(false);
-                                    }}
-                                    className={`block w-full rounded-lg px-3 py-3 text-left transition-all duration-200 hover:translate-x-1 hover:bg-white/10 ${pathname.startsWith("/my-plan") &&
-                                        activeNavButton === "saved"
+                                    href="/my-plan?tab=saved"
+                                    onClick={() =>
+                                        setIsMenuOpen(false)
+                                    }
+                                    className={`block w-full rounded-lg px-3 py-3 text-left transition-all duration-200 hover:translate-x-1 hover:bg-white/10 ${isSavedActive
                                         ? "bg-white/10 text-brand"
                                         : "text-white"
-                                        }`}
-                                >
-                                    Saved
+                                        }`}>Saved
                                 </Link>
                             </li>
 
