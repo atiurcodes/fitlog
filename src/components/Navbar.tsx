@@ -4,10 +4,9 @@ import { FitContext } from "@/context/FitContext";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
-import { use } from "react";
-import { useState } from "react";
+import { Suspense, use, useState } from "react";
 
-const Navbar = () => {
+const NavbarContent = () => {
     const pathname = usePathname();
     const searchParams = useSearchParams();
 
@@ -103,7 +102,8 @@ const Navbar = () => {
                             className={`flex items-center gap-2 rounded-full px-3 py-1.5 text-sm transition-colors duration-200 ${isPlanActive
                                 ? "bg-brand/20 text-brand"
                                 : "text-white hover:text-brand"
-                                }`}>
+                                }`}
+                        >
                             <span>Plan</span>
 
                             <span className="rounded-full bg-brand px-2.5 py-0.5 text-sm font-semibold text-black">
@@ -117,14 +117,14 @@ const Navbar = () => {
                             className={`flex items-center gap-2 rounded-full px-3 py-1.5 text-sm transition-colors duration-200 ${isSavedActive
                                 ? "bg-brand/20 text-brand"
                                 : "text-white hover:text-brand"
-                                }`}>
+                                }`}
+                        >
                             <span>Saved</span>
 
                             <span className="rounded-full border border-brand px-2.5 py-0.5 text-sm font-semibold text-brand">
                                 {saves.length}
                             </span>
                         </Link>
-
                     </div>
 
                     {/* Mobile Menu Button */}
@@ -167,7 +167,9 @@ const Navbar = () => {
                                     className={`block rounded-lg px-3 py-3 transition-all duration-200 hover:translate-x-1 hover:bg-white/10 ${isWorkoutsActive
                                         ? "bg-white/10 text-brand"
                                         : "text-white"
-                                        }`}>Workouts
+                                        }`}
+                                >
+                                    Workouts
                                 </Link>
                             </li>
 
@@ -181,7 +183,9 @@ const Navbar = () => {
                                     className={`block rounded-lg px-3 py-3 transition-all duration-200 hover:translate-x-1 hover:bg-white/10 ${isMyPlanActive
                                         ? "bg-white/10 text-brand"
                                         : "text-white"
-                                        }`}>My Plan
+                                        }`}
+                                >
+                                    My Plan
                                 </Link>
                             </li>
 
@@ -195,7 +199,9 @@ const Navbar = () => {
                                     className={`block w-full rounded-lg px-3 py-3 text-left transition-all duration-200 hover:translate-x-1 hover:bg-white/10 ${isPlanActive
                                         ? "bg-white/10 text-brand"
                                         : "text-white"
-                                        }`}>Plan
+                                        }`}
+                                >
+                                    Plan
                                 </Link>
                             </li>
 
@@ -209,7 +215,9 @@ const Navbar = () => {
                                     className={`block w-full rounded-lg px-3 py-3 text-left transition-all duration-200 hover:translate-x-1 hover:bg-white/10 ${isSavedActive
                                         ? "bg-white/10 text-brand"
                                         : "text-white"
-                                        }`}>Saved
+                                        }`}
+                                >
+                                    Saved
                                 </Link>
                             </li>
 
@@ -218,6 +226,14 @@ const Navbar = () => {
                 </div>
             </div>
         </section>
+    );
+};
+
+const Navbar = () => {
+    return (
+        <Suspense fallback={null}>
+            <NavbarContent />
+        </Suspense>
     );
 };
 

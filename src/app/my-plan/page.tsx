@@ -1,17 +1,16 @@
-'use client'
-
+"use client";
 import MyPlanCard from "@/components/MyPlanCard";
 import NoData from "@/components/NoData";
 import { FitContext } from "@/context/FitContext";
 import { WorkoutType } from "@/type";
-import { use, useState } from "react";
+import { Suspense, use, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 
 type SortOption = "Duration" | "Calories" | "Rating";
 
 type TabType = "today" | "saved";
 
-export default function Page() {
+function MyPlanContent() {
     const fitContext = use(FitContext);
 
     if (!fitContext) {
@@ -29,13 +28,16 @@ export default function Page() {
     // URL থেকে active tab নেওয়া
     const tab = searchParams.get("tab");
 
-    const activeTab: TabType = tab === "saved" ? "saved" : "today";
+    const activeTab: TabType =
+        tab === "saved" ? "saved" : "today";
 
     // Sort state
-    const [sortBy, setSortBy] = useState<SortOption>("Duration");
+    const [sortBy, setSortBy] =
+        useState<SortOption>("Duration");
 
     // Active tab অনুযায়ী current list
-    const currentPlans = activeTab === "today" ? plans : saves;
+    const currentPlans =
+        activeTab === "today" ? plans : saves;
 
     // Current list-এর উপর sorting
     const sortedPlans = [...currentPlans].sort((a, b) => {
@@ -129,7 +131,9 @@ export default function Page() {
                         {/* Today's Plan */}
                         <button
                             type="button"
-                            onClick={() => router.push("/my-plan?tab=today")}
+                            onClick={() =>
+                                router.push("/my-plan?tab=today")
+                            }
                             className={`cursor-pointer rounded-lg px-3 py-2 text-xs font-semibold transition-all sm:px-4 ${activeTab === "today"
                                 ? "bg-[#21242D] text-white shadow"
                                 : "text-muted hover:text-white"
@@ -141,7 +145,9 @@ export default function Page() {
                         {/* Saved */}
                         <button
                             type="button"
-                            onClick={() => router.push("/my-plan?tab=saved")}
+                            onClick={() =>
+                                router.push("/my-plan?tab=saved")
+                            }
                             className={`cursor-pointer rounded-lg px-3 py-2 text-xs font-semibold transition-all sm:px-4 ${activeTab === "saved"
                                 ? "bg-[#21242D] text-white shadow"
                                 : "text-muted hover:text-white"
@@ -162,7 +168,9 @@ export default function Page() {
                         <select
                             value={sortBy}
                             onChange={(e) =>
-                                setSortBy(e.target.value as SortOption)
+                                setSortBy(
+                                    e.target.value as SortOption
+                                )
                             }
                             className="w-full rounded-xl border border-gray-800 bg-[#15171D] px-3 py-2 text-xs text-muted outline-none sm:w-auto"
                         >
@@ -188,13 +196,15 @@ export default function Page() {
 
                     {sortedPlans.length > 0 ? (
 
-                        sortedPlans.map((plan: WorkoutType) => (
-                            <MyPlanCard
-                                key={plan.id}
-                                plan={plan}
-                                activeTab={activeTab}
-                            />
-                        ))
+                        sortedPlans.map(
+                            (plan: WorkoutType) => (
+                                <MyPlanCard
+                                    key={plan.id}
+                                    plan={plan}
+                                    activeTab={activeTab}
+                                />
+                            )
+                        )
 
                     ) : (
 
@@ -206,5 +216,13 @@ export default function Page() {
 
             </div>
         </section>
+    );
+}
+
+export default function Page() {
+    return (
+        <Suspense fallback={null}>
+            <MyPlanContent />
+        </Suspense>
     );
 }
