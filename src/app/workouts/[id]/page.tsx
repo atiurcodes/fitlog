@@ -7,7 +7,7 @@ export interface PageProps {
     params: Promise<{ id: string }>;
 }
 
-const singleDataPromise = async (id: string): Promise<WorkoutType> => {
+const getSingleData = async (id: string): Promise<WorkoutType> => {
     const res = await fetch(`https://api.abcz.workers.dev/api/fitlog/${id}`);
     if (!res.ok) {
         notFound();
@@ -18,7 +18,7 @@ const singleDataPromise = async (id: string): Promise<WorkoutType> => {
 
 export default async function Page({ params }: PageProps) {
     const { id } = await params;
-    const singleData = await singleDataPromise(id);
+    const singleData = await getSingleData(id);
     return (
         <section>
             <LibraryDetails singleData={singleData} />

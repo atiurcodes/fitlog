@@ -25,8 +25,10 @@ const Navbar = () => {
 
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-    // Navbar Plan/Saved active state
-    const [activeNav, setActiveNav] = useState<"plan" | "saved">("plan");
+    // Navbar Plan / Saved visual selection
+    const [activeNavButton, setActiveNavButton] = useState<
+        "plan" | "saved" | null
+    >(null);
 
     const isWorkoutsActive =
         pathname === "/" || pathname.startsWith("/workouts");
@@ -40,7 +42,7 @@ const Navbar = () => {
                 <Link
                     href="/"
                     className={`transition-colors duration-200 ${isWorkoutsActive
-                        ? "text-brand bg-brand/20 px-4 py-2 rounded-full"
+                        ? "rounded-full bg-brand/20 px-4 py-2 text-brand"
                         : "text-white hover:text-brand"
                         }`}
                 >
@@ -52,7 +54,7 @@ const Navbar = () => {
                 <Link
                     href="/my-plan"
                     className={`transition-colors duration-200 ${isMyPlanActive
-                        ? "text-brand bg-brand/20 px-4 py-2 rounded-full"
+                        ? "rounded-full bg-brand/20 px-4 py-2 text-brand"
                         : "text-white hover:text-brand"
                         }`}
                 >
@@ -96,9 +98,10 @@ const Navbar = () => {
                         {/* Plan */}
                         <Link
                             href="/my-plan"
-                            onClick={() => setActiveNav("plan")}
-                            className={`flex items-center gap-2 text-sm transition-colors duration-200 ${activeNav === "plan"
-                                ? "text-brand"
+                            onClick={() => setActiveNavButton("plan")}
+                            className={`flex items-center gap-2 rounded-full px-3 py-1.5 text-sm transition-colors duration-200 ${pathname.startsWith("/my-plan") &&
+                                activeNavButton === "plan"
+                                ? "bg-brand/20 text-brand"
                                 : "text-white hover:text-brand"
                                 }`}
                         >
@@ -112,9 +115,10 @@ const Navbar = () => {
                         {/* Saved */}
                         <Link
                             href="/my-plan"
-                            onClick={() => setActiveNav("saved")}
-                            className={`flex items-center gap-2 text-sm transition-colors duration-200 ${activeNav === "saved"
-                                ? "text-brand"
+                            onClick={() => setActiveNavButton("saved")}
+                            className={`flex items-center gap-2 rounded-full px-3 py-1.5 text-sm transition-colors duration-200 ${pathname.startsWith("/my-plan") &&
+                                activeNavButton === "saved"
+                                ? "bg-brand/20 text-brand"
                                 : "text-white hover:text-brand"
                                 }`}
                         >
@@ -129,6 +133,7 @@ const Navbar = () => {
 
                     {/* Mobile Menu Button */}
                     <button
+                        type="button"
                         onClick={() => setIsMenuOpen(!isMenuOpen)}
                         className="text-2xl text-white md:hidden"
                         aria-label="Toggle menu"
@@ -187,11 +192,12 @@ const Navbar = () => {
                                 <Link
                                     href="/my-plan"
                                     onClick={() => {
-                                        setActiveNav("plan");
+                                        setActiveNavButton("plan");
                                         setIsMenuOpen(false);
                                     }}
-                                    className={`block w-full rounded-lg px-3 py-3 text-left transition-all duration-200 hover:translate-x-1 hover:bg-white/10 ${activeNav === "plan"
-                                        ? "bg-brand/20 text-brand"
+                                    className={`block w-full rounded-lg px-3 py-3 text-left transition-all duration-200 hover:translate-x-1 hover:bg-white/10 ${pathname.startsWith("/my-plan") &&
+                                        activeNavButton === "plan"
+                                        ? "bg-white/10 text-brand"
                                         : "text-white"
                                         }`}
                                 >
@@ -204,11 +210,12 @@ const Navbar = () => {
                                 <Link
                                     href="/my-plan"
                                     onClick={() => {
-                                        setActiveNav("saved");
+                                        setActiveNavButton("saved");
                                         setIsMenuOpen(false);
                                     }}
-                                    className={`block w-full rounded-lg px-3 py-3 text-left transition-all duration-200 hover:translate-x-1 hover:bg-white/10 ${activeNav === "saved"
-                                        ? "bg-brand/20 text-brand"
+                                    className={`block w-full rounded-lg px-3 py-3 text-left transition-all duration-200 hover:translate-x-1 hover:bg-white/10 ${pathname.startsWith("/my-plan") &&
+                                        activeNavButton === "saved"
+                                        ? "bg-white/10 text-brand"
                                         : "text-white"
                                         }`}
                                 >

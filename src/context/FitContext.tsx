@@ -1,4 +1,3 @@
-
 'use client'
 
 import { WorkoutType } from "@/type";
@@ -11,9 +10,6 @@ export interface FitContextType {
     saves: WorkoutType[];
     setSaves: React.Dispatch<React.SetStateAction<WorkoutType[]>>;
 
-    activeTab: 'today' | 'saved';
-    setActiveTab: React.Dispatch<React.SetStateAction<'today' | 'saved'>>;
-
     // Completed workout IDs
     completedPlans: string[];
     setCompletedPlans: React.Dispatch<React.SetStateAction<string[]>>;
@@ -25,8 +21,6 @@ export default function FitProvider({ children }: { children: ReactNode }) {
     const [plans, setPlans] = useState<WorkoutType[]>([]);
     const [saves, setSaves] = useState<WorkoutType[]>([]);
 
-    const [activeTab, setActiveTab] = useState<'today' | 'saved'>('today');
-
     // Store IDs of completed workouts
     const [completedPlans, setCompletedPlans] = useState<string[]>([]);
 
@@ -36,9 +30,6 @@ export default function FitProvider({ children }: { children: ReactNode }) {
 
         saves,
         setSaves,
-
-        activeTab,
-        setActiveTab,
 
         completedPlans,
         setCompletedPlans,

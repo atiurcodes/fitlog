@@ -9,7 +9,7 @@ export interface LibraryCardProps {
 
 export default function LibraryCard({ data }: LibraryCardProps) {
     return (
-        <section className="py-10">
+        <section className="">
             <Link href={`/workouts/${data.id}`} >
                 <div className="bg-[#15171D] rounded-xl border border-transparent hover:border-brand transition-all duration-300 overflow-hidden">
                     <div>

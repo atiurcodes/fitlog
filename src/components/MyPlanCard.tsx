@@ -56,7 +56,11 @@ export default function MyPlanCard({
             setSaves(updatedSaves);
         }
 
-        toast.error(`${plan.name} removed from your plan!`);
+        toast.error(
+            activeTab === "today"
+                ? `${plan.name} removed from your plan!`
+                : `${plan.name} removed from saved!`
+        );
     };
 
     const handleMarkAsDone = () => {

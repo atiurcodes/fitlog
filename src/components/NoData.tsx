@@ -7,10 +7,11 @@ const NoData = () => {
             <div className='bg-[#15171D] p-10 flex flex-col justify-center items-center space-y-4 rounded-xl'>
                 <h2 className="text-2xl font-bold leading-tight text-white lg:text-3xl">NOTHING HERE YET</h2>
                 <p className="text-muted">Browse the library and add a lift to get today moving.</p>
-                <Link href='/'>
-                    <button className="cursor-pointer flex items-center gap-2 mt-7 rounded-lg bg-brand px-6 py-3 font-semibold text-black transition-all duration-300 hover:scale-105 hover:shadow-lg">
-                        Go to workouts
-                    </button></Link>
+                <Link href="/"
+                    className="mt-7 flex items-center gap-2 rounded-lg bg-brand px-6 py-3 font-semibold text-black transition-all duration-300 hover:scale-105 hover:shadow-lg"
+                >
+                    Go to workouts
+                </Link>
             </div>
         </section>
     );

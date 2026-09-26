@@ -1,4 +1,3 @@
-
 'use client'
 
 import MyPlanCard from "@/components/MyPlanCard";
@@ -6,8 +5,11 @@ import NoData from "@/components/NoData";
 import { FitContext } from "@/context/FitContext";
 import { WorkoutType } from "@/type";
 import { use, useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 
 type SortOption = "Duration" | "Calories" | "Rating";
+
+type TabType = "today" | "saved";
 
 export default function Page() {
     const fitContext = use(FitContext);
@@ -19,9 +21,15 @@ export default function Page() {
     const {
         plans,
         saves,
-        activeTab,
-        setActiveTab,
     } = fitContext;
+
+    const router = useRouter();
+    const searchParams = useSearchParams();
+
+    // URL থেকে active tab নেওয়া
+    const tab = searchParams.get("tab");
+
+    const activeTab: TabType = tab === "saved" ? "saved" : "today";
 
     // Sort state
     const [sortBy, setSortBy] = useState<SortOption>("Duration");
@@ -121,8 +129,8 @@ export default function Page() {
                         {/* Today's Plan */}
                         <button
                             type="button"
-                            onClick={() => setActiveTab("today")}
-                            className={`rounded-lg px-3 py-2 text-xs font-semibold transition-all cursor-pointer sm:px-4 ${activeTab === "today"
+                            onClick={() => router.push("/my-plan?tab=today")}
+                            className={`cursor-pointer rounded-lg px-3 py-2 text-xs font-semibold transition-all sm:px-4 ${activeTab === "today"
                                 ? "bg-[#21242D] text-white shadow"
                                 : "text-muted hover:text-white"
                                 }`}
@@ -133,8 +141,8 @@ export default function Page() {
                         {/* Saved */}
                         <button
                             type="button"
-                            onClick={() => setActiveTab("saved")}
-                            className={`rounded-lg px-3 py-2 text-xs font-semibold transition-all cursor-pointer sm:px-4 ${activeTab === "saved"
+                            onClick={() => router.push("/my-plan?tab=saved")}
+                            className={`cursor-pointer rounded-lg px-3 py-2 text-xs font-semibold transition-all sm:px-4 ${activeTab === "saved"
                                 ? "bg-[#21242D] text-white shadow"
                                 : "text-muted hover:text-white"
                                 }`}
