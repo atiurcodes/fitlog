@@ -8,7 +8,7 @@ export interface PageProps {
 }
 
 const getSingleData = async (id: string): Promise<WorkoutType> => {
-    const res = await fetch(`https://api.abcz.workers.dev/api/fitlog/${id}`);
+    const res = await fetch(`https://api.api-store.workers.dev/api/fitlog/${id}`);
     if (!res.ok) {
         notFound();
     }
