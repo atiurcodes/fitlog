@@ -25,6 +25,11 @@ const MyPlanButton = ({
             (plan) => plan.id === singleData.id
         );
 
+        if (plans.length >= 5) {
+            toast.info("Today's plan is full. Finish your current workouts first.");
+            return;
+        }
+
         if (alreadyExists) {
             toast.info(`${singleData.name} is already in your plan.`);
             return;

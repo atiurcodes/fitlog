@@ -7,10 +7,16 @@
     --color-muted: #9ca3af;
     --color-background: #000000;
     --color-foreground: #ffffff;
+
+    --font-oswald: var(--font-oswald);
 }
 
 body {
     background: var(--color-background);
     color: var(--color-foreground);
     font-family: var(--font-inter), sans-serif;
+}
+
+html {
+    scroll-behavior: smooth;
 }

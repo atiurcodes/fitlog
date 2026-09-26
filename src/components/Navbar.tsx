@@ -91,20 +91,20 @@ const Navbar = () => {
                     </div>
 
                     {/* Desktop Buttons */}
-                    <div className="hidden items-center gap-5 md:flex">
+                    <div className="hidden items-center gap-4 md:flex">
 
                         {/* Plan */}
                         <Link
                             href="/my-plan"
                             onClick={() => setActiveNav("plan")}
-                            className={`rounded-full px-4 py-2 transition-all duration-200 ${activeNav === "plan"
-                                ? "bg-brand/20 text-brand"
-                                : "text-muted hover:text-brand"
+                            className={`flex items-center gap-2 text-sm transition-colors duration-200 ${activeNav === "plan"
+                                ? "text-brand"
+                                : "text-white hover:text-brand"
                                 }`}
                         >
                             <span>Plan</span>
 
-                            <span className="ml-1 rounded-full bg-brand px-2 text-black">
+                            <span className="rounded-full bg-brand px-2.5 py-0.5 text-sm font-semibold text-black">
                                 {plans.length}
                             </span>
                         </Link>
@@ -113,18 +113,16 @@ const Navbar = () => {
                         <Link
                             href="/my-plan"
                             onClick={() => setActiveNav("saved")}
-                            className={`rounded-full px-4 py-2 transition-all duration-200 ${activeNav === "saved"
-                                ? "bg-brand/20 text-brand"
-                                : "text-muted hover:text-brand"
+                            className={`flex items-center gap-2 text-sm transition-colors duration-200 ${activeNav === "saved"
+                                ? "text-brand"
+                                : "text-white hover:text-brand"
                                 }`}
                         >
                             <span>Saved</span>
 
-                            {saves.length > 0 && (
-                                <span className="ml-1 rounded-full px-2 text-white">
-                                    {saves.length}
-                                </span>
-                            )}
+                            <span className="rounded-full border border-brand px-2.5 py-0.5 text-sm font-semibold text-brand">
+                                {saves.length}
+                            </span>
                         </Link>
 
                     </div>

@@ -1,8 +1,8 @@
 
 import { WorkoutType } from "@/type"
 import Image from "next/image";
-import MyPlanButton from "../LibraryDetails/myPlanButton";
-import SaveButton from "../LibraryDetails/SaveButton";
+import MyPlanButton from "../WorkoutsDetailsButton/myPlanButton";
+import SaveButton from "../WorkoutsDetailsButton/SaveButton";
 
 export interface LibraryDetailsProps {
     singleData: WorkoutType;
@@ -19,7 +19,7 @@ export default function LibraryDetails({ singleData }: LibraryDetailsProps) {
                         alt={singleData.name}
                         width={500}
                         height={500}
-                        className="mx-auto w-full max-w-[600px] rounded-xl object-cover"
+                        className="mx-auto w-full max-w-150 rounded-xl object-cover"
                     />
                 </div>
 
@@ -86,7 +86,7 @@ export default function LibraryDetails({ singleData }: LibraryDetailsProps) {
                                 DURATION
                             </h2>
                             <p className="text-right text-sm font-semibold text-muted sm:text-base">
-                                {singleData.duration}
+                                {singleData.duration} min
                             </p>
                         </div>
 
@@ -95,7 +95,7 @@ export default function LibraryDetails({ singleData }: LibraryDetailsProps) {
                                 CALORIES
                             </h2>
                             <p className="text-right text-sm font-semibold text-muted sm:text-base">
-                                {singleData.caloriesBurned}
+                                {singleData.caloriesBurned} kcal
                             </p>
                         </div>
 
@@ -111,7 +111,7 @@ export default function LibraryDetails({ singleData }: LibraryDetailsProps) {
                     </div>
 
                     <div>
-                        <h2 className="text-white font-bold text-xl">INSTRUCTIONS</h2>
+                        <h2 className="text-xl font-bold text-white">INSTRUCTIONS</h2>
 
                         <ol className="list-decimal space-y-2 pl-6 text-sm sm:text-base">
                             {

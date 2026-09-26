@@ -97,7 +97,7 @@ export default function MyPlanCard({
                         </h3>
 
                         <p className="text-xs font-medium text-muted">
-                            {plan.category}
+                            {plan.equipment}
                         </p>
 
                         {/* Metrics */}

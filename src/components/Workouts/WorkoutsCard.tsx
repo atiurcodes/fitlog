@@ -54,12 +54,12 @@ export default function LibraryCard({ data }: LibraryCardProps) {
                         <div className="flex flex-wrap gap-x-5 gap-y-3 sm:gap-x-8 items-center text-muted text-sm sm:text-base">
                             <span className="flex items-center gap-2">
                                 <FaClock />
-                                {data.duration}
+                                {data.duration} min
                             </span>
 
                             <span className="flex items-center gap-2">
                                 <FaFire />
-                                {data.caloriesBurned}
+                                {data.caloriesBurned} kcal
                             </span>
 
                             <span className="flex items-center gap-2">

@@ -1,6 +1,6 @@
 
 import { WorkoutType } from "@/type";
-import LibraryCard from "./LibraryCard";
+import LibraryCard from "./WorkoutsCard";
 
 const PromiseData = async (): Promise<WorkoutType[]> => {
     const res = await fetch(
@@ -20,7 +20,7 @@ export default async function Workouts() {
     const datas = await PromiseData();
 
     return (
-        <section className="container mx-auto px-4">
+        <section className="container mx-auto px-4" id="library">
             <div className="space-y-1 py-4">
                 <h2 className="text-2xl font-bold leading-tight text-white lg:text-3xl">
                     THE LIBRARY

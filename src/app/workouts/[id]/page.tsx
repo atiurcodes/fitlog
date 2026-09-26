@@ -1,6 +1,7 @@
 
-import LibraryDetails from "@/components/Workouts/LibraryDetails";
+import LibraryDetails from "@/components/Workouts/WorkoutsDetails";
 import { WorkoutType } from "@/type";
+import { notFound } from "next/navigation";
 
 export interface PageProps {
     params: Promise<{ id: string }>;
@@ -9,7 +10,7 @@ export interface PageProps {
 const singleDataPromise = async (id: string): Promise<WorkoutType> => {
     const res = await fetch(`https://api.abcz.workers.dev/api/fitlog/${id}`);
     if (!res.ok) {
-        throw new Error('Failed to single data fatching.')
+        notFound();
     }
     const data = await res.json();
     return data;
